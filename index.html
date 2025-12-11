@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas 🎄</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+        }
+
+        .scene {
+            position: relative;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .tree-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .star {
+            font-size: 50px;
+            display: block;
+            text-align: center;
+            margin-bottom: -10px;
+            animation: starTwinkle 1s infinite alternate;
+            filter: drop-shadow(0 0 20px gold);
+        }
+
+        .tree {
+            position: relative;
+        }
+
+        .layer {
+            width: 0;
+            height: 0;
+            margin: -15px auto;
+            position: relative;
+            border-style: solid;
+            border-color: transparent transparent #fff transparent;
+            filter: blur(2px) brightness(1.5);
+            animation: treeSway 3s ease-in-out infinite;
+        }
+
+        .layer:nth-child(1) {
+            border-width: 0 50px 70px 50px;
+            animation-delay: 0s;
+        }
+
+        .layer:nth-child(2) {
+            border-width: 0 70px 90px 70px;
+            animation-delay: 0.1s;
+        }
+
+        .layer:nth-child(3) {
+            border-width: 0 90px 110px 90px;
+            animation-delay: 0.2s;
+        }
+
+        .layer:nth-child(4) {
+            border-width: 0 110px 130px 110px;
+            animation-delay: 0.3s;
+        }
+
+        .trunk {
+            width: 50px;
+            height: 70px;
+            background: linear-gradient(to bottom, #8b7355, #654321);
+            margin: 10px auto 0;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .message {
+            margin-top: 40px;
+            color: #fff;
+            text-align: center;
+            padding: 0 30px;
+            max-width: 600px;
+        }
+
+        .message h1 {
+            font-size: 56px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.9);
+            animation: textGlow 2s ease-in-out infinite;
+            font-style: italic;
+        }
+
+        .message p {
+            font-size: 20px;
+            line-height: 1.8;
+            text-shadow: 0 0 15px rgba(255,255,255,0.6);
+            white-space: pre-line;
+        }
+
+        .snowflake {
+            position: fixed;
+            color: #fff;
+            font-size: 24px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        .light {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: lightTwinkle 1.5s infinite;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        @keyframes starTwinkle {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes treeSway {
+            0%, 100% {
+                transform: translateX(0) scale(1);
+            }
+            50% {
+                transform: translateX(5px) scale(1.02);
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 30px rgba(255,255,255,0.9), 0 0 60px rgba(255,255,255,0.5);
+            }
+            50% {
+                text-shadow: 0 0 50px rgba(255,255,255,1), 0 0 100px rgba(255,255,255,0.8);
+            }
+        }
+
+        @keyframes lightTwinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .message h1 {
+                font-size: 36px;
+            }
+            .message p {
+                font-size: 16px;
+            }
+            .layer:nth-child(1) { border-width: 0 35px 50px 35px; }
+            .layer:nth-child(2) { border-width: 0 50px 65px 50px; }
+            .layer:nth-child(3) { border-width: 0 65px 80px 65px; }
+            .layer:nth-child(4) { border-width: 0 80px 95px 80px; }
+            .trunk {
+                width: 35px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="tree-container">
+            <div class="star">⭐</div>
+            <div class="tree" id="tree">
+                <div class="layer"></div>
+                <div class="layer"></div>
+                <div class="layer"></div>
+                <div class="layer"></div>
+            </div>
+            <div class="trunk"></div>
+        </div>
+        
+        <div class="message">
+            <h1>Merry Christmas</h1>
+            <p id="customMessage">Cảm ơn bé Hạnh vì đã ở bên anh,<br>đẹp một Giáng Sinh tràn tràn yêu thương.</p>
+        </div>
+    </div>
+
+    <script>
+        // Lấy message từ URL nếu có
+        const urlParams = new URLSearchParams(window.location.search);
+        const customMsg = urlParams.get('msg');
+        if (customMsg) {
+            document.getElementById('customMessage').textContent = decodeURIComponent(customMsg);
+        }
+
+        // Tạo tuyết rơi
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            snowflake.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            snowflake.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(snowflake);
+
+            // Xóa sau khi animation kết thúc
+            setTimeout(() => snowflake.remove(), 8000);
+        }
+
+        // Tạo tuyết liên tục
+        for (let i = 0; i < 50; i++) {
+            setTimeout(createSnowflake, i * 100);
+        }
+        setInterval(createSnowflake, 300);
+
+        // Thêm đèn trang trí trên cây
+        const layers = document.querySelectorAll('.layer');
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffd700', '#ff69b4'];
+        
+        layers.forEach((layer, layerIndex) => {
+            const numLights = 6 + layerIndex * 2;
+            for (let i = 0; i < numLights; i++) {
+                const light = document.createElement('div');
+                light.className = 'light';
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                light.style.backgroundColor = color;
+                light.style.color = color;
+                
+                const angle = (i / numLights) * Math.PI;
+                const radius = 40 + layerIndex * 25;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * (radius * 0.6) + layerIndex * 20;
+                
+                light.style.left = x + 'px';
+                light.style.top = y + 'px';
+                light.style.animationDelay = Math.random() * 1.5 + 's';
+                
+                layer.appendChild(light);
+            }
+        });
+    </script>
+</body>
+</html>
